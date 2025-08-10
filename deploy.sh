@@ -24,10 +24,16 @@ EOF
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
 
 # Wait for ingress controller to be ready
-kubectl wait --namespace ingress-nginx \
-  --for=condition=Ready pod \
-  --selector=app.kubernetes.io/component=controller \
-  --timeout=90s
+#kubectl wait --namespace ingress-nginx \
+#  --for=condition=Ready pod \
+#  --selector=app.kubernetes.io/component=controller \
+#  --timeout=90s
+
+# retry in a loop until the pod appears
+until kubectl get pods -n ingress-nginx --selector=app.kubernetes.io/component=controller; do
+  echo "Waiting for ingress controller pod to appear..."
+  sleep 2
+done
 
 # Deploy a test NGINX app
 kubectl create deployment hello --image=nginx
