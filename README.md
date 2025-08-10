@@ -6,16 +6,16 @@ It’s lightweight, fast, and great for local development.
 
 ## install kubernetes
 
-# Download the latest stable release
+## Download the latest stable release
 `curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"`
 
-# Make it executable
+## Make it executable
 `chmod +x kubectl`
 
-# Move it to your PATH
+## Move it to your PATH
 `sudo mv kubectl /usr/local/bin/`
 
-# Verify install
+## Verify install
 `kubectl version --client`
 
 
