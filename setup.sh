@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
-set -e
+set -euo pipefail
+trap 'echo "❌ Error on line $LINENO: $BASH_COMMAND"' ERR
+
+# set -e → Exit if any command fails.
+# set -u → Exit if you use an undefined variable.
+# set -o pipefail → If any command in a pipeline fails, the pipeline fails (by default Bash only returns the last command’s status).
+# trap '...' ERR → Run that snippet whenever a command errors, so you can log which line and command failed.
+
 
 # Install Kind
 curl -Lo kind https://kind.sigs.k8s.io/dl/latest/kind-linux-amd64
